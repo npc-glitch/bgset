@@ -1,5 +1,8 @@
 # bgset
 Script for setting colors and wallpapers with pywal<br>
+
+<img src="https://i.imgur.com/fHibN7J.png">
+
 Made to be used with:<br>
 <a href=https://github.com/npc-glitch/dwm>my build of dwm</a> as the window manager<br>
 st, patched with the xresources patch, and/or Alacritty
