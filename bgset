@@ -1,0 +1,37 @@
+#!/bin/sh
+
+#     _ __  _ __   ___      __ _| (_) |_ ___| |__
+#    | '_ \| '_ \ / __|    / _` | | | __/ __| '_ \
+#    | | | | |_) | (__    | (_| | | | || (__| | | |
+#    |_| |_| .__/ \___|____\__, |_|_|\__\___|_| |_|
+#          |_|       |_____|___/
+#  ________________________________________________
+#  Script for changing colorschemes and wallpapers
+#  ________________________________________________
+
+
+#location input, if no location is found pick a random wallpaper from specified folder
+bgloc="$1"
+xwallpaper --zoom "$bgloc" 2> /dev/null || bgloc=$(find ~/Pictures/wallpaperz | shuf -n 1)
+
+# Set wallpaper and generate colors
+xwallpaper --zoom "$bgloc" 2> /dev/null
+wal -nq --saturate 0.6 -i "$bgloc"
+
+# Updates the standard location of xresources with the generated one, for ST
+cat ~/.cache/wal/colors.Xresources > ~/.Xresources
+
+# Updates colors for discord
+pywal-discord &
+
+# Updates colors for firefox
+pywalfox update 2> /dev/null &
+
+# Updates colors for alacritty
+alacritty-wal &
+
+# Runs my 4chan style generator
+4wal &
+
+# Refreshes the dwm colors
+sleep 2 && xdotool key super+F5
